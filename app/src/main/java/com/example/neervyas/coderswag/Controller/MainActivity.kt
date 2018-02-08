@@ -2,7 +2,11 @@ package com.example.neervyas.coderswag.Controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.neervyas.coderswag.Adapters.CategoryAdapter
 import com.example.neervyas.coderswag.Model.Category
 import com.example.neervyas.coderswag.R
@@ -18,7 +22,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter = CategoryAdapter(this, DataService.categories)
-
         categoryListView.adapter = adapter
+
+        categoryListView.setOnItemClickListener  { parent , view, position, id ->
+            val category = DataService.categories[position]
+            val makeText = Toast.makeText(this, "you clicked on ${category.title} cell", Toast.LENGTH_SHORT)
+            makeText.show()
+        }
     }
 }
