@@ -9,22 +9,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.neervyas.coderswag.Model.Category
 import com.example.neervyas.coderswag.R
-import kotlinx.android.synthetic.main.category_list_item.view.*
 
 /**
  * Created by neervyas on 8/2/18.
  */
 class CategoryRecycleAdapter(val context: Context, val categories: List<Category>) : RecyclerView.Adapter<CategoryRecycleAdapter.Holder>() {
     override fun onBindViewHolder(holder: Holder?, position: Int) {
-        holder?.bindCategory(categories[position],context)
+        holder?.bindcategory(categories[position], context)
     }
+
+
 
     override fun getItemCount(): Int {
         return categories.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.category_list_item,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.category_list_item,parent,false)
         return Holder(view)
     }
 
@@ -32,9 +33,8 @@ class CategoryRecycleAdapter(val context: Context, val categories: List<Category
         val categoryImage = itemView?.findViewById<ImageView>(R.id.categoryImage)
         val categoryName = itemView?.findViewById<TextView>(R.id.categoryName)
 
-        fun bindCategory(category: Category, context: Context){
-            val resourceId = context.resources.getIdentifier(category.image,"drawable", context.packageName)
-
+        fun bindcategory(category: Category,context: Context) {
+            val resourceId = context.resources.getIdentifier(category.image,"drawable",context.packageName)
             categoryImage?.setImageResource(resourceId)
             categoryName?.text = category.title
         }
